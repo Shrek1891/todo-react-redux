@@ -1,35 +1,21 @@
 import Cell from "../cell/cell.tsx";
-import {iconsForRow} from "../icons/icons.tsx";
 import {JSX} from "react";
+import useCreateTitleIcon from "../../hooks/useCreateTitleIcon.tsx";
 
 type Props = {
     menuItem: string[],
-    className: string,
     isIcons: boolean
 }
-const Title = ({menuItem, className, isIcons}: Props) => {
-    let nameOfCell: string[] = [];
-    let icon: JSX.Element[] = [];
-    if (className === 'main') {
-        icon = iconsForRow.map((item: JSX.Element, index: number) => {
-            if (index === 0) {
-                item = <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"></svg>
-            }
-            return item;
-        });
-        nameOfCell = [...menuItem]
-    }
-    if (className === 'row') {
-        icon = [...iconsForRow];
-    }
+const Title = ({menuItem, isIcons}: Props) => {
+    const [nameOfCell, icon] = useCreateTitleIcon(menuItem);
     return (
         <>
-            <div className={className}>
-                {nameOfCell.map((item: string, index: number) => <Cell key={index}>{item}</Cell>)}
-                {isIcons && <Cell>
-                    <div className="icons">
-                        {icon.map((item: JSX.Element | string, index: number) => <Cell key={index}>{item}</Cell>)}
-                    </div>
+            <div className="flex items-center justify-between m-1 p-3 bg-[gray] w-11/12">
+                {nameOfCell.map((item: string, index: number) => <Cell key={index} className={"flex-1"}>{item}</Cell>)}
+                {isIcons && <Cell className="flex items-center flex-row justify-between">
+                    <Cell className="flex items-center flex-row justify-between ">
+                        {icon.map((item: JSX.Element | string, index: number) => <Cell className="m-1" key={index}>{item}</Cell>)}
+                    </Cell>
                 </Cell>}
             </div>
         </>

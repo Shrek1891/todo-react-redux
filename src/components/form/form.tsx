@@ -4,6 +4,7 @@ import {addTask, closeFormForAdd, editTask} from "../../features/todoReducer.ts"
 import nameIcons from "../../helpers/categortInIcon.ts";
 import {useState} from "react";
 import {selectTodo} from "../../features/todoReducerSlice.ts";
+import {classesForm, inputClass} from "../../namesClasses/classesName.ts";
 
 type Props = {
     edit: {
@@ -57,10 +58,20 @@ const Form = ({edit}: Props) => {
         dispatch(closeFormForAdd())
     }
     return (
-        <form onSubmit={(e) => submitFormHandler(e)}>
+        <form
+            onSubmit={(e) => submitFormHandler(e)}
+            className={classesForm}>
             <label form="name">Input name task</label>
-            <input onChange={(e) => setInputName(e.target.value)} type="text" placeholder="name task" name="name"
-                   id="name" required value={inputName}/>
+            <input
+                onChange={(e) => setInputName(e.target.value)}
+                type="text"
+                placeholder="name task"
+                name="name"
+                id="name"
+                required
+                value={inputName}
+                className={inputClass}
+            />
             <label htmlFor="category">select category</label>
             <select
                 defaultValue={selectName}
@@ -68,6 +79,7 @@ const Form = ({edit}: Props) => {
                 id="category"
                 required
                 onChange={(e) => setSelectName(e.target.value)}
+                className={inputClass}
             >
                 <option value="Task">Task</option>
                 <option value="Random thought">Random thought</option>
@@ -80,6 +92,7 @@ const Form = ({edit}: Props) => {
                    id="camp-week"
                    min="2018-W18"
                    defaultValue={date}
+                   className={inputClass}
             />
             <label htmlFor="content">write task</label>
             <textarea
@@ -87,6 +100,7 @@ const Form = ({edit}: Props) => {
                 id="content"
                 required
                 defaultValue={content}
+                className={inputClass}
                 onChange={(e) => setContent(e.target.value)}></textarea>
             <div>
                 <Button

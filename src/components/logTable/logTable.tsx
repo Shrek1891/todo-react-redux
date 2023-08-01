@@ -16,10 +16,15 @@ const LogTable = () => {
         <>
             <Title
                 menuItem={archiveMenu}
-                className={"main"}
                 isIcons={false}
             />
-            {logList.map((item, index: number) => <Row key={index} list={item} isIcons={false}/>)}
+            {logList.map((item, index: number) =>
+                <Row
+                    key={index}
+                    list={item}
+                    isIcons={false}
+                    currentIcon={[]}
+                />)}
         </>
 
     )
