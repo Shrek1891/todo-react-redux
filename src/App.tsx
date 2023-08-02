@@ -1,9 +1,9 @@
-import TableMain from "./components/tableMain/tableMain.tsx";
-import LogTable from "./components/logTable/logTable.tsx";
+import TableMain from "./view/tableMain.tsx";
+import LogTable from "./view/logTable.tsx";
 import Form from "./components/form/form.tsx";
 import {useSelector} from "react-redux";
 import {selectTodo} from "./features/todoReducerSlice.ts";
-import ShowArchive from "./components/archiveTable/showArchive.tsx";
+import ShowArchive from "./view/showArchive.tsx";
 function App() {
     const {isOpenFormFoAdd, isShowArchive, edit} = useSelector(selectTodo);
     return (

@@ -1,14 +1,14 @@
 import {useDispatch, useSelector} from "react-redux";
-import {selectTodo} from "../../features/todoReducerSlice.ts";
-import {closeArchiveTable} from "../../features/todoReducer.ts";
-import Title from "../title/title.tsx";
-import {menuItem} from "../../data/list.ts";
-import {data} from "../../types/types.ts";
-import Row from "../row/row.tsx";
-import Button from "../button/button.tsx";
+import {selectTodo} from "../features/todoReducerSlice.ts";
+import {closeArchiveTable} from "../features/todoReducer.ts";
+import Title from "../components/title/title.tsx";
+import {menuItem} from "../data/list.ts";
+import {data} from "../types/types.ts";
+import Row from "../components/row/row.tsx";
+import Button from "../components/button/button.tsx";
 import {useEffect, useState} from "react";
-import {classesForm} from "../../namesClasses/classesName.ts";
-import {iconsForRow} from "../icons/icons.tsx";
+import {classesForm} from "../namesClasses/classesName.ts";
+import {iconsForRow} from "../components/icons/icons.tsx";
 
 const ShowArchive = () => {
     const dispatch = useDispatch();

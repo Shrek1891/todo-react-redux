@@ -20,8 +20,6 @@ const Row = ({list, isIcons, currentIcon}: Props) => {
     const id = `${list.id}`
     const dispatch = useDispatch();
     const key = list.icon;
-
-
     const click = (e: React.MouseEvent<HTMLElement>) => {
         const target = e.target as HTMLElement;
         const node = target.closest('.row');

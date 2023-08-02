@@ -1,10 +1,10 @@
-import Title from "../title/title.tsx";
-import {archiveMenu} from "../../data/list.ts";
-import Row from "../row/row.tsx";
+import Title from "../components/title/title.tsx";
+import {archiveMenu} from "../data/list.ts";
+import Row from "../components/row/row.tsx";
 import {useDispatch, useSelector} from "react-redux";
-import {selectTodo} from "../../features/todoReducerSlice.ts";
+import {selectTodo} from "../features/todoReducerSlice.ts";
 import {useEffect} from "react";
-import {getLogList} from "../../features/todoReducer.ts";
+import {getLogList} from "../features/todoReducer.ts";
 
 const LogTable = () => {
     const dispatch = useDispatch();
