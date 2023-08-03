@@ -11,7 +11,7 @@ const LogTable = () => {
     const {logList, listOfTask} = useSelector(selectTodo);
     useEffect(() => {
         dispatch(getLogList())
-    }, [listOfTask])
+    }, [listOfTask]);
     return (
         <>
             <Title

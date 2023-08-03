@@ -14,19 +14,14 @@ type Props = {
 }
 const Form = ({edit}: Props) => {
     const {listOfTask} = useSelector(selectTodo);
-    let inputNameDefault = '';
-    let selectNameDefault = 'Task';
-    let dateDefault = '';
-    let contentDefault = '';
-    if (edit) {
-        if (edit.isEdit) {
+    let [inputNameDefault,selectNameDefault,dateDefault,contentDefault] = ["","Task","",""];
+    if (edit.isEdit) {
             const res = listOfTask.find((el) => el.id === edit.id);
             if (res) {
                 inputNameDefault = res.name;
                 selectNameDefault = res.category;
                 dateDefault = res.Dates;
                 contentDefault = res.content;
-            }
         }
     }
     const [inputName, setInputName] = useState(inputNameDefault);
@@ -47,12 +42,11 @@ const Form = ({edit}: Props) => {
                 category: selectName,
                 content: content.length > 20 ? content.substring(0, 17) + '...' : content,
                 Dates: date,
+                archived: false
             }
             dispatch(addTask(res));
         }
         dispatch(closeFormForAdd())
-    }
-    const submit = () => {
     }
     const closeFormHandler = () => {
         dispatch(closeFormForAdd())
@@ -104,7 +98,7 @@ const Form = ({edit}: Props) => {
                 onChange={(e) => setContent(e.target.value)}></textarea>
             <div>
                 <Button
-                    task={submit}
+                    task={()=>{}}
                     type={"submit"}
                 >{edit && edit.isEdit ? 'Edit' : 'Add'}</Button>
                 <Button

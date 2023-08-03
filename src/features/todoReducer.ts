@@ -1,117 +1,50 @@
 import {createSlice} from "@reduxjs/toolkit";
 import categortInIcon from "../helpers/categortInIcon.ts";
+import {content, todoTypes} from "../types/types.ts";
 
+
+const initialState: todoTypes = {
+    isOpenFormFoAdd: false,
+    isShowArchive: false,
+    edit: {isEdit: false, id: 0},
+    listOfArchive: [],
+    listOfTask: [],
+    logList: [{
+        id:'task',
+        icon: 'task',
+        name: 'Task',
+        active: 0,
+        archive: 0
+    }, {
+        id: 'idea',
+        icon: 'idea',
+        name: 'Idea',
+        active: 0,
+        archive: 0
+    }, {
+        id: 'random_thought',
+        icon: 'random_thought',
+        name: 'Random thought',
+        active: 0,
+        archive: 0
+    }],
+
+}
 const todoReducer = createSlice({
     name: '@@todo',
-    initialState: {
-        isOpenFormFoAdd: false,
-        isShowArchive: false,
-        edit: {isEdit: false, id: 0},
-        listOfArchive: [
-            {
-                id: 8,
-                icon: 'random_thought',
-                name: 'The theory of evolution',
-                created: '2022-01-01',
-                category: 'Random thought',
-                content: 'The Evolution of Humanity',
-                Dates: ' ',
-
-            }
-        ],
-        listOfTask: [
-            {
-                id: 1,
-                icon: 'task',
-                name: 'Shopping List',
-                created: '2022-01-01',
-                category: 'Task',
-                content: 'Groceries',
-                Dates: ' ',
-
-            },
-            {
-                id: 2,
-                icon: 'random_thought',
-                name: 'The theory of evolution',
-                created: '2022-01-01',
-                category: 'Random thought',
-                content: 'The Evolution of Humanity',
-                Dates: ' ',
-
-            },
-            {
-                id: 3,
-                icon: 'idea',
-                name: 'New idea',
-                created: '2022-01-01',
-                category: 'Idea',
-                content: 'Implement a new idea',
-                Dates: ' ',
-
-            }, {
-                id: 4,
-                icon: 'idea',
-                name: 'New idea',
-                created: '2022-01-01',
-                category: 'Idea',
-                content: 'Implement a new idea',
-                Dates: ' ',
-
-            }, {
-                id: 5,
-                icon: 'idea',
-                name: 'New idea',
-                created: '2022-01-01',
-                category: 'Idea',
-                content: 'Implement a new idea',
-                Dates: ' ',
-
-            },
-            {
-                id: 6,
-                icon: 'idea',
-                name: 'New idea',
-                created: '2022-01-01',
-                category: 'Idea',
-                content: 'Implement a new idea',
-                Dates: ' ',
-
-            },
-            {
-                id: 7,
-                icon: 'idea',
-                name: 'New idea',
-                created: '2022-01-01',
-                category: 'Idea',
-                content: 'Implement a new idea',
-                Dates: '',
-
-            }
-        ],
-        logList: [{
-            id: 'taskId',
-            icon: 'task',
-            name: 'Task',
-            active: 0,
-            archive: 0,
-        }, {
-            id: 'ideaId',
-            icon: 'idea',
-            name: 'Idea',
-            active: 0,
-            archive: 0,
-        }, {
-            id: 'ThouthId',
-            icon: 'random_thought',
-            name: 'Random thought',
-            active: 0,
-            archive: 0,
-        }],
-
-
-    },
+    initialState ,
     reducers: {
+
+        setListOfTask: (state, action) => {
+           state.listOfTask = action.payload.filter((el: content) => {
+               return !el.archived
+           })
+        },
+        setArchiveList: (state, action) => {
+            state.listOfArchive = action.payload.filter((el: content) => {
+                return el.archived
+            })
+        },
         openFormForAdd: (state, action) => {
             state.isOpenFormFoAdd = true
             state.edit = action.payload
@@ -133,7 +66,6 @@ const todoReducer = createSlice({
                 item.archive = state.listOfArchive.filter((el) => {
                     return el.icon === item.icon
                 }).length
-
             })
         },
         closeArchiveTable: (state) => {
@@ -162,7 +94,7 @@ const todoReducer = createSlice({
                 if (el.id === action.payload.id) {
                     el.name = action.payload.name
                     el.category = action.payload.category
-                    el.Dates = `${el.Dates} , ${action.payload.Dates}`
+                    el.Dates !== action.payload.Dates && action.payload.Dates ? `${el.Dates} , ${action.payload.Dates}` : ""
                     el.content = action.payload.content
                     el.icon = categortInIcon(action.payload.category)
                 }
@@ -213,5 +145,7 @@ export const {
     editTask,
     deleteFromArchive,
     unArchive,
-    editArchive
+    editArchive,
+    setListOfTask,
+    setArchiveList
 } = todoReducer.actions;
