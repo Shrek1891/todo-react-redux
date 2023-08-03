@@ -1,11 +1,12 @@
-import Title from "../title/title.tsx";
-import { menuItem} from "../../data/list.ts";
-import Row from "../row/row.tsx";
-import {data} from "../../types/types.ts";
-import Button from "../button/button.tsx";
+import Title from "../components/title/title.tsx";
+import {menuItem} from "../data/list.ts";
+import Row from "../components/row/row.tsx";
+import {data} from "../types/types.ts";
+import Button from "../components/button/button.tsx";
 import {useDispatch, useSelector} from "react-redux";
-import {openArchiveTable, openFormForAdd} from "../../features/todoReducer.ts";
-import { selectTodo} from "../../features/todoReducerSlice.ts";
+import {openArchiveTable, openFormForAdd} from "../features/todoReducer.ts";
+import {selectTodo} from "../features/todoReducerSlice.ts";
+import {iconsForRow} from "../components/icons/icons.tsx";
 
 const TableMain = () => {
     const dispatch = useDispatch();
@@ -20,10 +21,15 @@ const TableMain = () => {
         <>
             <Title
                 menuItem={menuItem}
-                className={"main"}
                 isIcons={true}
             />
-        {listOfTask.map((item: data, index) => <Row key={index} list={item} isIcons={true}/>)}
+            {listOfTask.map((item: data, index) =>
+                <Row
+                    key={index}
+                    list={item}
+                    isIcons={true}
+                    currentIcon={iconsForRow}
+                />)}
             <div>
                 <Button
                     task={openFormHandler}
